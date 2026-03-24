@@ -2,6 +2,39 @@
 
 <!-- <START NEW CHANGELOG ENTRY> -->
 
+## 0.0.8
+
+([Full Changelog](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/compare/v0.0.7...b3d867df995221706759eb40352f23e6a1ce3a26))
+
+### Enhancements made
+
+- Upgrade and rename Claude persona, update README [#65](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/65) ([@dlqqq](https://github.com/dlqqq))
+- Bump Gemini ACP version [#62](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/62) ([@srdas](https://github.com/srdas), [@dlqqq](https://github.com/dlqqq))
+- Add Mistral Vibe ACP Persona [#55](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/55) ([@jtpio](https://github.com/jtpio), [@dlqqq](https://github.com/dlqqq))
+- Emit events to Jupyter EventLogger [#51](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/51) ([@bhavana-nair](https://github.com/bhavana-nair), [@dlqqq](https://github.com/dlqqq), [@joshuatowner](https://github.com/joshuatowner))
+- Disable diff file links before file is written, convert paths to relative [#50](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/50) ([@andrii-i](https://github.com/andrii-i), [@dlqqq](https://github.com/dlqqq), [@joshuatowner](https://github.com/joshuatowner))
+- Add Gemini ACP Persona [#48](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/48) ([@srdas](https://github.com/srdas), [@dlqqq](https://github.com/dlqqq))
+- Render tool calls inline in stream order [#47](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/47) ([@andrii-i](https://github.com/andrii-i), [@dlqqq](https://github.com/dlqqq))
+
+### Bugs fixed
+
+- Fix request_permission when agent skips tool_call start [#61](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/61) ([@dlqqq](https://github.com/dlqqq), [@andrii-i](https://github.com/andrii-i))
+
+### Documentation improvements
+
+- Update README with CLAUDE_CODE_EXECUTABLE info [#58](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/pull/58) ([@vincentye38](https://github.com/vincentye38), [@dlqqq](https://github.com/dlqqq), [@jasongrout](https://github.com/jasongrout))
+
+### Contributors to this release
+
+The following people contributed discussions, new ideas, code and documentation contributions, and review.
+See [our definition of contributors](https://github-activity.readthedocs.io/en/latest/use/#how-does-this-tool-define-contributions-in-the-reports).
+
+([GitHub contributors page for this release](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/graphs/contributors?from=2026-03-10&to=2026-03-24&type=c))
+
+@andrii-i ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Aandrii-i+updated%3A2026-03-10..2026-03-24&type=Issues)) | @bhavana-nair ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Abhavana-nair+updated%3A2026-03-10..2026-03-24&type=Issues)) | @dlqqq ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Adlqqq+updated%3A2026-03-10..2026-03-24&type=Issues)) | @jasongrout ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Ajasongrout+updated%3A2026-03-10..2026-03-24&type=Issues)) | @joshuatowner ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Ajoshuatowner+updated%3A2026-03-10..2026-03-24&type=Issues)) | @jtpio ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Ajtpio+updated%3A2026-03-10..2026-03-24&type=Issues)) | @srdas ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Asrdas+updated%3A2026-03-10..2026-03-24&type=Issues)) | @vincentye38 ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Avincentye38+updated%3A2026-03-10..2026-03-24&type=Issues))
+
+<!-- <END NEW CHANGELOG ENTRY> -->
+
 ## 0.0.7
 
 ([Full Changelog](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/compare/v0.0.6...3fd6353740aac4e32ff0c67a81a254333d9504e2))
@@ -23,8 +56,6 @@ See [our definition of contributors](https://github-activity.readthedocs.io/en/l
 ([GitHub contributors page for this release](https://github.com/jupyter-ai-contrib/jupyter-ai-acp-client/graphs/contributors?from=2026-03-03&to=2026-03-10&type=c))
 
 @andrii-i ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Aandrii-i+updated%3A2026-03-03..2026-03-10&type=Issues)) | @bhavana-nair ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Abhavana-nair+updated%3A2026-03-03..2026-03-10&type=Issues)) | @dlqqq ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Adlqqq+updated%3A2026-03-03..2026-03-10&type=Issues)) | @erkin98 ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Aerkin98+updated%3A2026-03-03..2026-03-10&type=Issues)) | @joshuatowner ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Ajoshuatowner+updated%3A2026-03-03..2026-03-10&type=Issues)) | @knaresh ([activity](https://github.com/search?q=repo%3Ajupyter-ai-contrib%2Fjupyter-ai-acp-client+involves%3Aknaresh+updated%3A2026-03-03..2026-03-10&type=Issues))
-
-<!-- <END NEW CHANGELOG ENTRY> -->
 
 ## 0.0.6
 
