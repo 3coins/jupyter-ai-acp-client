@@ -291,7 +291,6 @@ class BaseAcpPersona(BasePersona):
         self._acp_slash_commands = commands
 
     async def shutdown(self):
-        # TODO: allow shutdown() to be async
         if getattr(self, "_shutting_down", False):
             return
         self._shutting_down = True
