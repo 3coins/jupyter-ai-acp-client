@@ -298,16 +298,6 @@ class BaseAcpPersona(BasePersona):
         await super().shutdown()
         await self._shutdown()
 
-    def _future_resolved(self, future: Task | None) -> bool:
-        """Returns True if the future completed successfully (not pending,
-        cancelled, or failed)."""
-        return (
-            isinstance(future, Task)
-            and future.done()
-            and not future.cancelled()
-            and future.exception() is None
-        )
-
     async def _shutdown(self):
         self.log.debug("[shutdown] Starting for '%s'.", self.__class__.__name__)
 
@@ -322,76 +312,62 @@ class BaseAcpPersona(BasePersona):
             if isinstance(future, Task) and not future.done():
                 future.cancel()
 
-        # Step 1: Session cleanup (only if both client and session resolved)
-        if self._future_resolved(
-            self.__class__._client_future
-        ) and self._future_resolved(self._client_session_future):
-            try:
-                client = await self.get_client()
-                session_id = await self.get_session_id()
-                await client.end_session(session_id)
-                self.log.debug(
-                    "[shutdown] Step 1: session ended for '%s'.",
-                    self.__class__.__name__,
-                )
-            except Exception:
-                self.log.debug(
-                    "[shutdown] Step 1: failed for '%s'.",
-                    self.__class__.__name__,
-                    exc_info=True,
-                )
-        else:
+        # Step 1: Session cleanup
+        try:
+            client = await self.get_client()
+            session_id = await self.get_session_id()
+            await client.end_session(session_id)
             self.log.debug(
-                "[shutdown] Step 1: skipped (client or session not ready) for '%s'.",
+                "[shutdown] Step 1: session ended for '%s'.",
                 self.__class__.__name__,
             )
-
-        # Step 2: Close connection (only if client resolved)
-        if self._future_resolved(self.__class__._client_future):
-            try:
-                client = await self.get_client()
-                conn = await client.get_connection()
-                await conn.close()
-                self.log.debug(
-                    "[shutdown] Step 2: connection closed for '%s'.",
-                    self.__class__.__name__,
-                )
-            except Exception:
-                self.log.debug(
-                    "[shutdown] Step 2: failed for '%s'.",
-                    self.__class__.__name__,
-                    exc_info=True,
-                )
-        else:
+        except asyncio.CancelledError:
+            pass
+        except Exception:
             self.log.debug(
-                "[shutdown] Step 2: skipped (client not ready) for '%s'.",
+                "[shutdown] Step 1: failed for '%s'.",
                 self.__class__.__name__,
+                exc_info=True,
             )
 
-        # Step 3: Kill the subprocess (only if subprocess resolved)
-        if self._future_resolved(self.__class__._subprocess_future):
-            try:
-                subprocess = await self.get_agent_subprocess()
-                subprocess.kill()
-                self.log.debug(
-                    "[shutdown] Step 3: subprocess killed for '%s'.",
-                    self.__class__.__name__,
-                )
-            except (ProcessLookupError, PermissionError, OSError):
-                self.log.debug(
-                    "[shutdown] Step 3: subprocess already dead for '%s'.",
-                    self.__class__.__name__,
-                )
-            except Exception:
-                self.log.debug(
-                    "[shutdown] Step 3: failed for '%s'.",
-                    self.__class__.__name__,
-                    exc_info=True,
-                )
-        else:
+        # Step 2: Close connection
+        try:
+            client = await self.get_client()
+            conn = await client.get_connection()
+            await conn.close()
             self.log.debug(
-                "[shutdown] Step 3: skipped (subprocess not ready) for '%s'.",
+                "[shutdown] Step 2: connection closed for '%s'.",
                 self.__class__.__name__,
+            )
+        except asyncio.CancelledError:
+            pass
+        except Exception:
+            self.log.debug(
+                "[shutdown] Step 2: failed for '%s'.",
+                self.__class__.__name__,
+                exc_info=True,
+            )
+
+        # Step 3: Kill the subprocess
+        try:
+            subprocess = await self.get_agent_subprocess()
+            subprocess.kill()
+            self.log.debug(
+                "[shutdown] Step 3: subprocess killed for '%s'.",
+                self.__class__.__name__,
+            )
+        except asyncio.CancelledError:
+            pass
+        except (ProcessLookupError, PermissionError, OSError):
+            self.log.debug(
+                "[shutdown] Step 3: subprocess already dead for '%s'.",
+                self.__class__.__name__,
+            )
+        except Exception:
+            self.log.debug(
+                "[shutdown] Step 3: failed for '%s'.",
+                self.__class__.__name__,
+                exc_info=True,
             )
 
         self.log.debug("[shutdown] Complete for '%s'.", self.__class__.__name__)
